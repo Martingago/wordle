@@ -1,38 +1,127 @@
-"use strict"
+"use strict";
+import { basePalabras } from "./basePalabras.js";
+
+// Obtener palabra aleatoria desde la BBDD
+const posicionPalabra = Number(Math.trunc(Math.random() * basePalabras.length));
+const secretWord = basePalabras[posicionPalabra];
+console.log(secretWord);
 
 const letras = document.querySelectorAll(".letra");
-let secretWord = ("piano").toUpperCase();
 let descompuesta = [];
 let introducidaUsuario = [];
-var abecedario = "abcdefghijklmnñopqrstuvwxyzçABCDEFGHIJKLMNÑOPQRSTUVWXYZÇ";
 
 for (let i = 0; i < secretWord.length; i++) {
-    descompuesta.push(secretWord[i])
+  descompuesta.push(secretWord[i]);
 }
+
+const intentos = document.querySelectorAll(".palabra-usuario");
+let posicion = 0;
 
 // Cargar datos introducidos por usuario en pantalla
-
+const mostrarDatosPantalla = () => {
 document.addEventListener("keydown", (e) => {
-    if (validarInput(e.key) && introducidaUsuario.length <= 4) {
-        letras[introducidaUsuario.length].textContent = `${e.key.toLocaleUpperCase()}`
-        introducidaUsuario.push(e.key.toLocaleUpperCase())
-    } else if (e.key.toUpperCase() === "BACKSPACE") {
-        introducidaUsuario.pop()
-        letras[introducidaUsuario.length].textContent = null;
-    }
-})
-// Validar que el valor sea una letra
 
-const validarInput = (texto) => {
-    for (let i = 0; i < texto.length; i++) {
-        if (abecedario.indexOf(texto.charAt(i), 0) != -1 && texto.length == 1) {
-            return true;
-        }
-    }
-    return false;
+  if (validarInput(e.key) && introducidaUsuario.length <= 4) {
+    intentos[posicion].children[introducidaUsuario.length].textContent = `${e.key.toLowerCase()}`;
+    introducidaUsuario.push(e.key.toLowerCase());
+  } else if (e.key.toLowerCase() === "backspace") {
+    introducidaUsuario.pop();
+    letras[introducidaUsuario.length].textContent = null;
+  }
+});
 }
 
-document.addEventListener("keydown",
-    (e) => {
-        validarInput(e.key)
-    })
+mostrarDatosPantalla()
+
+// Validar que el valor sea una letra
+const abecedario = "abcdefghijklmnñopqrstuvwxyzçABCDEFGHIJKLMNÑOPQRSTUVWXYZÇ";
+const validarInput = (texto) => {
+  for (let i = 0; i < texto.length; i++) {
+    if (abecedario.indexOf(texto.charAt(i), 0) != -1 && texto.length == 1) {
+      return true;
+    }
+  }
+  return false;
+};
+
+// Convertir el input del usuario en string
+let letraString = "";
+const inputToString = () => {
+  letraString = introducidaUsuario.join("");
+};
+
+// Validacion de las palabras que introduce el usuario
+
+const pantallaError = document.querySelector(".error-msg");
+
+document.addEventListener("keydown", (e) => {
+  if (e.key.toLowerCase() === "enter") {
+    inputToString();
+    console.log(introducidaUsuario, descompuesta);
+    if (introducidaUsuario.length === 5) {
+      if (basePalabras.includes(letraString)) {
+        comprobarVictoria();
+      } else {
+        pintarPantalla("La palabra no es válida");
+      }
+    } else {
+      pintarPantalla("La palabra no tiene 5 letras");
+    }
+    return posicion++
+  }
+});
+
+const pintarPantalla = (texto) => {
+  pantallaError.textContent = texto;
+};
+
+// intento perdido
+
+let vidas = 5;
+const perderIntento = () => {
+  vidas--;
+  if (vidas <= 0) {
+    pintarPantalla("te has quedado sin vidas");
+  } else {
+    pintarPantalla(`Te quedan ${vidas} intentos`);
+    comprobarLetra();
+  }
+};
+const comprobarVictoria = () => {
+  if (letraString == secretWord) {
+    pintarPantalla("Ganaste");
+    acertarLetra();
+  } else {
+    perderIntento();
+  }
+};
+
+// Pista usuario letras
+
+const acertarLetra = () => {
+  for (let i = 0; i < 5; i++) {
+    letras[i].classList.remove("existe");
+    letras[i].classList.remove("noexiste");
+    letras[i].classList.add("correcta");
+  }
+};
+
+const comprobarLetra = () => {
+  for (let i = 0; i < 5; i++) {
+    if (descompuesta[i] == introducidaUsuario[i]) {
+      letras[i].classList.remove("existe");
+      letras[i].classList.remove("noexiste");
+      letras[i].classList.add("correcta");
+    } else {
+      if (descompuesta.includes(introducidaUsuario[i])) {
+        letras[i].classList.remove("correcta");
+        letras[i].classList.remove("noexiste");
+        letras[i].classList.add("existe");
+      } else {
+        letras[i].classList.remove("correcta")
+        letras[i].classList.remove("existe")
+        letras[i].classList.add("noexiste");
+      }
+    }
+  }
+};
