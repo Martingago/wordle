@@ -21,34 +21,48 @@ body {
     grid-template-columns: auto;
     margin: auto;
     width: fit-content;
-    padding: 2rem 1rem;
+    padding: 1rem;
     border-radius: 10px;
     user-select: none;
+    gap: .25rem;
 }
 
 .palabra-usuario {
     display: grid;
     grid-template-columns: repeat(5, auto);
-    gap: .5rem;
     width: fit-content;
-    font-size: 3rem;
+    font-size: 2rem;
     line-height: 3rem;
     text-transform: uppercase;
-    margin: .5rem auto;
+    margin: auto;
+    gap: .25rem;
 }
 
 .letra {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid black;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.9);
     font-weight: 700;
     border-radius: 3px;
-    width: 50px;
-    height: 70px;
-    transition: all .3s linear;
-    
+    width: 55px;
+    height: 55px;
+    transition: backgrund-color .3s linear;
 }
+
+@keyframes keyInput {
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
 
 @keyframes aparicion {
     0%{
@@ -162,6 +176,11 @@ body {
 }
 
 /* CLASES DE BOTONES */
+
+.focus{
+    border: 2px solid black;
+}
+
 .correcta{
     animation: aparicion .3s linear;
     border: 2px solid rgb(65, 155, 65);

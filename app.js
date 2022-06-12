@@ -1,163 +1,137 @@
 "use strict";
-import { basePalabras } from "./basePalabras.js";
+import { basePalabras } from "./hooks/basePalabras.js";
+import { validarInput } from "./hooks/funcionesPantalla.js";
+import { secretWord } from "./hooks/basePalabras.js";
 
-// Obtener palabra aleatoria desde la BBDD
-const posicionPalabra = Number(Math.trunc(Math.random() * basePalabras.length));
-const secretWord = basePalabras[posicionPalabra];
-console.log(secretWord);
+console.log("La palabra secreta es:", secretWord);
 
 const letras = document.querySelectorAll(".letra");
+// Variables default cuando se inicializa la app
 let descompuesta = [];
 let introducidaUsuario = [];
-
-for (let i = 0; i < secretWord.length; i++) {
-    descompuesta.push(secretWord[i]);
-}
-
-const intentos = document.querySelectorAll(".palabra-usuario");
 let posicion = 0;
 
-// Cargar datos introducidos por usuario en pantalla
-document.addEventListener("keydown", (e) => {
-
-    if (validarInput(e.key) && introducidaUsuario.length <= 4 &&  posicion <5) {
-        intentos[posicion].children[introducidaUsuario.length].textContent = `${e.key.toLowerCase()}`;
-        introducidaUsuario.push(e.key.toLowerCase());
-    } else if (e.key.toLowerCase() === "backspace") {
-        introducidaUsuario.pop();
-        intentos[posicion].children[introducidaUsuario.length].textContent = null;
-    }
-});
-
-// Validar que el valor sea una letra
-const abecedario = "abcdefghijklmnñopqrstuvwxyzçABCDEFGHIJKLMNÑOPQRSTUVWXYZÇ";
-const validarInput = (texto) => {
-    for (let i = 0; i < texto.length; i++) {
-        if (abecedario.indexOf(texto.charAt(i), 0) != -1 && texto.length == 1) {
-            return true;
-        }
-    }
-    return false;
-};
-
-// TECLADO  
-const tecladoLetra = document.querySelectorAll(".cargar-letra");
-const cargarDatosTeclado = () => {
-    for (let i = 0; i < tecladoLetra.length; i++) {
-        tecladoLetra[i].addEventListener(
-            "click",
-            () => {
-                if (introducidaUsuario.length <= 4 && posicion <5) {
-                    intentos[posicion].children[introducidaUsuario.length].textContent = `${tecladoLetra[i].textContent}`;
-                    introducidaUsuario.push(tecladoLetra[i].textContent.toLowerCase())
-                }
-            }
-        )
-    }
-}
-
-
-const borrarDatosTeclado = () => {
-    const borrarLetra = document.querySelector(".borrar-letra");
-    borrarLetra.addEventListener(
-        "click",
-        () => {
-            introducidaUsuario.pop();
-            intentos[posicion].children[introducidaUsuario.length].textContent = null;
-
-        }
-    );
-}
-
-const enviarDatosTeclado = () => {
-    const enterTeclado = document.querySelector(".cargar-palabra");
-    enterTeclado.addEventListener("click",
-        () => {
-            inputToString()
-            validarPalabra()
-        });
-
-
-}
-
-borrarDatosTeclado();
-cargarDatosTeclado();
-enviarDatosTeclado()
-
-// Convertir el input del usuario en string
-let letraString = "";
-const inputToString = () => {
-    letraString = introducidaUsuario.join("");
-};
-
+// Fragmenta la palabra en un array con las letras separadas
+for (let i = 0; i < secretWord.length; i++) { descompuesta.push(secretWord[i]); }
 
 const pantallaError = document.querySelector(".error-msg");
+const intentos = document.querySelectorAll(".palabra-usuario");
 
+// Esta funcion se encarga de mostrar por pantalla los datos que introduce el usuario mediante teclado.
+// Tambien carga en el array de introducidaUsuario la palabra para posteriormente ser validada y comprobada.
 document.addEventListener("keydown", (e) => {
+    if (validarInput(e.key) && introducidaUsuario.length < 5 && posicion < 5) {
+        añadirAnimacionInput();
+        intentos[posicion].children[introducidaUsuario.length].textContent = `${e.key.toLowerCase()}`;
+        introducidaUsuario.push(e.key.toLowerCase());
+    } else if (e.key.toLowerCase() === "backspace" && posicion < 5) {
+        suprimir();
+    }
     if (e.key.toLowerCase() === "enter") {
-        inputToString();
-        validarPalabra();
+        comprobarVictoria()
     }
 });
 
+// De la misma manera que la anterior, esta funcion carga por pantalla los datos que introduce el usuario, pero de esta vez, a través del teclado digital.
+// Carga datos en el array de usuario para posteriormente ser comparado y validado.
+const tecladoLetra = document.querySelectorAll(".cargar-letra");
+tecladoLetra.forEach(e => {
+    e.addEventListener(
+        "click",
+        () => {
+            pintarPantalla("")
+            if (introducidaUsuario.length < 5 && posicion < 5) {
+                añadirAnimacionInput()
+                intentos[posicion].children[introducidaUsuario.length].textContent = `${e.textContent}`;
+                introducidaUsuario.push(e.textContent.toLowerCase())
+            }
+        }
+    );
+});
+// Borra ultima letra del teclado digital
+const borrarLetra = document.querySelector(".borrar-letra");
+borrarLetra.addEventListener(
+    "click",
+    () => {
+        if (posicion < 5) {
+            suprimir()
+        }
+    }
+);
+// Enter del teclado digital
+const enterTeclado = document.querySelector(".cargar-palabra");
+enterTeclado.addEventListener("click",
+    () => {
+        if (posicion < 5) {
+            comprobarVictoria();     
+        }
+    });
+
+//Borra datos de pantalla   
+const suprimir = () => {
+    pintarPantalla("")
+    introducidaUsuario.pop();
+    intentos[posicion].children[introducidaUsuario.length].textContent = null;
+    quitarAnimacionInput()
+}
+
+//Animaciones del input
+const añadirAnimacionInput = () => {
+    intentos[posicion].children[introducidaUsuario.length].style.animation = "keyInput .1s linear"
+    intentos[posicion].children[introducidaUsuario.length].classList.add("focus")
+}
+const quitarAnimacionInput = () => {
+    intentos[posicion].children[introducidaUsuario.length].style.animation = ""
+    intentos[posicion].children[introducidaUsuario.length].classList.remove("focus")
+}
 
 // Validacion de las palabras que introduce el usuario;
 // Si la palabra es valida, se comprueba
+
+let letraString = "";
 const validarPalabra = () => {
+    letraString = introducidaUsuario.join("")
     if (introducidaUsuario.length === 5) {
         if (basePalabras.includes(letraString)) {
-            comprobarVictoria();
-            posicion++;
-            introducidaUsuario = []
-
+            return true;
         } else {
             pintarPantalla("La palabra no es válida");
-            zumbidoError()
+            zumbidoError();   
         }
     } else {
         pintarPantalla("La palabra no tiene 5 letras");
-        zumbidoError()
+        zumbidoError();
     }
+    return false
 }
 
 const pintarPantalla = (texto) => {
     pantallaError.textContent = texto;
 };
-
 const zumbidoError = () => {
     intentos[posicion].style.animation = "palabraNoValida .3s linear";
     setTimeout(() => {
         intentos[posicion].style.animation = "";
     }, 300);
 }
-
-
-// intento perdido
-
-let vidas = 5;
-const perderIntento = () => {
-    vidas--;
-    if (vidas < 0) {
-        pintarPantalla("te has quedado sin vidas");
-        return vidas
-    } else {
-        comprobarLetra();
-    }
-};
+// Comprueba si el usuario ha acertado la palabra
 const comprobarVictoria = () => {
-    if (letraString == secretWord) {
-        pintarPantalla("Ganaste");
-        comprobarLetra()
-
-    } else {
-        perderIntento();
+    if(validarPalabra(letraString)){
+        if(letraString === secretWord){
+            pintarPantalla("ganaste");
+            comprobarLetra();
+        }else{
+            comprobarLetra()
+            posicion++;
+            introducidaUsuario = []
+        }
     }
 };
 
 // Pista usuario letras
 
 const letrasCorrecta = [];
-const letrasExiste =  [];
+const letrasExiste = [];
 const letrasNoExiste = [];
 
 
@@ -166,14 +140,11 @@ const comprobarLetra = () => {
         if (descompuesta[i] == introducidaUsuario[i]) {
             intentos[posicion].children[i].classList.add("correcta");
             letrasCorrecta.push(introducidaUsuario[i])
-            
-        } 
-        
+        }
         else {
             if (descompuesta.includes(introducidaUsuario[i])) {
                 intentos[posicion].children[i].classList.add("existe")
                 letrasExiste.push(introducidaUsuario[i])
-            
 
                 // crear funcion en caso de: una palabra introducida por un usuario que contiene una letra duplicada,
                 // si solo se encuentra 1 vez, pintar la que se encuentra mal situada en posicion "noexiste", ya que la que existe ya se ha pintado
@@ -181,14 +152,14 @@ const comprobarLetra = () => {
             } else {
                 intentos[posicion].children[i].classList.add("noexiste")
                 letrasNoExiste.push(introducidaUsuario[i])
-            
+
             }
         }
-        
+
     }
     console.log("letras correctas:", letrasCorrecta)
     console.log("letras existen:", letrasExiste)
-    
+
 };
 
 
