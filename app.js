@@ -34,7 +34,13 @@ document.addEventListener("keydown", (e) => {
 
 // De la misma manera que la anterior, esta funcion carga por pantalla los datos que introduce el usuario, pero de esta vez, a través del teclado digital.
 // Carga datos en el array de usuario para posteriormente ser comparado y validado.
+const tecladoDigital = ["q","w","e","r","t","y","u","i","o","p","a","s","d","f","g","h","j","k","l","ñ","z","x","c","v","b","n","m"]
 const tecladoLetra = document.querySelectorAll(".cargar-letra");
+
+for(let i =0;i<tecladoLetra.length; i++){
+    tecladoLetra[i].textContent = `${tecladoDigital[i].toUpperCase()}`
+}
+
 tecladoLetra.forEach(e => {
     e.addEventListener(
         "click",
@@ -134,33 +140,36 @@ const letrasCorrecta = [];
 const letrasExiste = [];
 const letrasNoExiste = [];
 
-
 const comprobarLetra = () => {
     for (let i = 0; i < 5; i++) {
         if (descompuesta[i] == introducidaUsuario[i]) {
             intentos[posicion].children[i].classList.add("correcta");
-            letrasCorrecta.push(introducidaUsuario[i])
+            pintarTecladoDigital(letrasCorrecta, introducidaUsuario[i], "correcta")
         }
         else {
             if (descompuesta.includes(introducidaUsuario[i])) {
                 intentos[posicion].children[i].classList.add("existe")
-                letrasExiste.push(introducidaUsuario[i])
-
+                pintarTecladoDigital(letrasExiste, introducidaUsuario[i], "existe")
                 // crear funcion en caso de: una palabra introducida por un usuario que contiene una letra duplicada,
                 // si solo se encuentra 1 vez, pintar la que se encuentra mal situada en posicion "noexiste", ya que la que existe ya se ha pintado
-
             } else {
                 intentos[posicion].children[i].classList.add("noexiste")
-                letrasNoExiste.push(introducidaUsuario[i])
-
+                pintarTecladoDigital(letrasNoExiste, introducidaUsuario[i], "noexiste")
             }
         }
-
     }
     console.log("letras correctas:", letrasCorrecta)
     console.log("letras existen:", letrasExiste)
+    console.log("letras noexisten:", letrasNoExiste)
 
 };
+
+const pintarTecladoDigital = (estadoLetra, vueltaUsuario,clase) => {
+    estadoLetra.push(tecladoDigital.indexOf(vueltaUsuario))
+                for(let i=0; i<estadoLetra.length; i++){
+                    tecladoLetra[estadoLetra[i]].classList.add(clase)
+                }
+}
 
 
 
