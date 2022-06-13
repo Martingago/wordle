@@ -3,6 +3,8 @@ import { basePalabras } from "./hooks/basePalabras.js";
 import { validarInput } from "./hooks/funcionesPantalla.js";
 import { secretWord } from "./hooks/basePalabras.js";
 
+// const secretWord = "lacou";
+
 console.log("La palabra secreta es:", secretWord);
 
 const letras = document.querySelectorAll(".letra");
@@ -144,24 +146,43 @@ const comprobarLetra = () => {
     for (let i = 0; i < 5; i++) {
         if (descompuesta[i] == introducidaUsuario[i]) {
             intentos[posicion].children[i].classList.add("correcta");
-            pintarTecladoDigital(letrasCorrecta, introducidaUsuario[i], "correcta")
+            pintarTecladoDigital(letrasCorrecta, introducidaUsuario[i], "correcta") 
         }
+            
+
         else {
             if (descompuesta.includes(introducidaUsuario[i])) {
                 intentos[posicion].children[i].classList.add("existe")
                 pintarTecladoDigital(letrasExiste, introducidaUsuario[i], "existe")
                 // crear funcion en caso de: una palabra introducida por un usuario que contiene una letra duplicada,
                 // si solo se encuentra 1 vez, pintar la que se encuentra mal situada en posicion "noexiste", ya que la que existe ya se ha pintado
+                const letrasRepetidasUsuario = introducidaUsuario.reduce((ac,current) => {
+                    if(current == introducidaUsuario[i])
+                    ac.push(current);
+                    return ac
+                }, [])
+                console.log("usuario Numero de ", introducidaUsuario[i], "es", letrasRepetidasUsuario.length)
+                const letrasRepetidasSecreta = descompuesta.reduce((ac,current) => {
+                    if(current == descompuesta[i])
+                    ac.push(current);
+                    return ac
+                }, [])
+                console.log(" secreta Numero de ", descompuesta[i], "es", letrasRepetidasSecreta.length)
+                
+                if(letrasRepetidasSecreta.length == letrasRepetidasUsuario.length){
+                    intentos[posicion].children[i].classList.add("existe");
+                } else{
+                    intentos[posicion].children[i].classList.add("noexiste");
+                }
+
+
             } else {
                 intentos[posicion].children[i].classList.add("noexiste")
                 pintarTecladoDigital(letrasNoExiste, introducidaUsuario[i], "noexiste")
             }
         }
     }
-    console.log("letras correctas:", letrasCorrecta)
-    console.log("letras existen:", letrasExiste)
-    console.log("letras noexisten:", letrasNoExiste)
-
+    
 };
 
 const pintarTecladoDigital = (estadoLetra, vueltaUsuario,clase) => {
@@ -170,6 +191,10 @@ const pintarTecladoDigital = (estadoLetra, vueltaUsuario,clase) => {
                     tecladoLetra[estadoLetra[i]].classList.add(clase)
                 }
 }
-
-
-
+const limpiarTecladoDigital = () => {
+    for(let i=0; i<letrasExiste.length; i++){
+        if(tecladoLetra[letrasExiste[i]].classList.contains("existe")){
+            tecladoLetra[letrasExiste[i]].classList.remove("existe")
+        }
+    }
+}
