@@ -1,9 +1,7 @@
 "use strict";
 import { basePalabras } from "./hooks/basePalabras.js";
-import { validarInput } from "./hooks/funcionesPantalla.js";
+import { validarInput, AlertaPalabraNoValida } from "./hooks/funcionesPantalla.js";
 import { secretWord } from "./hooks/basePalabras.js";
-
-// const secretWord = "lacou";
 
 console.log("La palabra secreta es:", secretWord);
 
@@ -103,11 +101,11 @@ const validarPalabra = () => {
         if (basePalabras.includes(letraString)) {
             return true;
         } else {
-            pintarPantalla("La palabra no es válida");
+            AlertaPalabraNoValida("La palabra no está en la lista")
             zumbidoError();   
         }
     } else {
-        pintarPantalla("La palabra no tiene 5 letras");
+        AlertaPalabraNoValida("No hay suficientes caracteres")
         zumbidoError();
     }
     return false
@@ -148,8 +146,6 @@ const comprobarLetra = () => {
             intentos[posicion].children[i].classList.add("correcta");
             pintarTecladoDigital(letrasCorrecta, introducidaUsuario[i], "correcta") 
         }
-            
-
         else {
             if (descompuesta.includes(introducidaUsuario[i])) {
                 intentos[posicion].children[i].classList.add("existe")
@@ -174,8 +170,6 @@ const comprobarLetra = () => {
                 } else{
                     intentos[posicion].children[i].classList.add("noexiste");
                 }
-
-
             } else {
                 intentos[posicion].children[i].classList.add("noexiste")
                 pintarTecladoDigital(letrasNoExiste, introducidaUsuario[i], "noexiste")
@@ -198,3 +192,4 @@ const limpiarTecladoDigital = () => {
         }
     }
 }
+

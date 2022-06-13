@@ -11,6 +11,58 @@ body {
     display: grid;
     justify-content: center;
     font-family: montserrat;
+    
+}
+
+
+.alertas-usuario{
+    position: fixed;
+    width: 100%;
+    height: fit-content;
+    top: 3.5rem;
+    right: 0;
+    z-index: 2;
+}
+.alertas-usuario p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 285px;
+    height: 57px;
+    font-size: 1rem;
+    margin: .5rem auto;
+    background-color: rgb(27, 27, 27);
+    color: white;
+    border-radius: 5px;
+}
+
+@keyframes cartelError {
+    0%{
+        width: 0px;
+        height: 0px;
+        font-size: 0px;
+        opacity: 0;
+    }
+    100%{
+        width: 285px;
+        height: 57px;
+        font-size: 0rem;
+        opacity: 1;
+    }
+}
+@keyframes ReverseCartelError {
+    0%{
+        width: 285px;
+        height: 57px;
+        font-size: 0rem;
+        opacity: 1;
+    }
+    100%{
+        width: 0px;
+        height: 0px;
+        font-size: 0px;
+        opacity: 0;
+    }
 }
 
 
@@ -131,7 +183,7 @@ body {
     grid-template-columns: auto;
     grid-template-rows: repeat(3, auto);
     height: fit-content;
-    gap: .5rem;
+    gap: .25rem;
     padding: 1rem;
     user-select: none;
     cursor: pointer;
@@ -140,7 +192,7 @@ body {
 .linea-letras{
     display: flex;
     flex-direction: row;
-    gap: .5rem;
+    gap: .25rem;
     width: 100%;
 }
 
