@@ -14,6 +14,7 @@ const abecedario = "abcdefghijklmnñopqrstuvwxyzçABCDEFGHIJKLMNÑOPQRSTUVWXYZÇ
 };
 
 // Alerta pantalla error de palabra
+
 var container = document.querySelector(".alertas-usuario")
 export const AlertaPalabraNoValida = (texto) => {
     if(container.childElementCount <7){

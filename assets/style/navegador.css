@@ -1,0 +1,21 @@
+.wordle-nav-component{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    background-color: green;
+}
+.wordle-nav-component ul{
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+}
+.wordle-nav-component ul li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+    .wordle-nav-component ul li button{
+        border: none;
+        margin: .5rem;
+    }

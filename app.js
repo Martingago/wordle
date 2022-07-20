@@ -1,9 +1,6 @@
 "use strict";
 import { basePalabras } from "./hooks/basePalabras.js";
-import {
-  validarInput,
-  AlertaPalabraNoValida,
-} from "./hooks/funcionesPantalla.js";
+import { validarInput, AlertaPalabraNoValida } from "./hooks/funcionesPantalla.js";
 import { secretWord } from "./hooks/basePalabras.js";
 
 console.log("La palabra secreta es:", secretWord);
@@ -84,9 +81,7 @@ tecladoLetra.forEach((e) => {
     pintarPantalla("");
     if (introducidaUsuario.length < 5 && posicion < 5) {
       añadirAnimacionInput();
-      intentos[posicion].children[
-        introducidaUsuario.length
-      ].textContent = `${e.textContent}`;
+      intentos[posicion].children[introducidaUsuario.length].textContent = `${e.textContent}`;
       introducidaUsuario.push(e.textContent.toLowerCase());
     }
   });
@@ -185,7 +180,7 @@ const comprobarLetra = () => {
       if (descompuesta.includes(introducidaUsuario[i])) {
         intentos[posicion].children[i].classList.add("existe");
         pintarTecladoDigital(letrasExiste, introducidaUsuario[i], "existe");
-        
+
         const letrasRepetidasUsuario = introducidaUsuario.reduce(
           (ac, current) => {
             if (current == introducidaUsuario[i]) ac.push(current);
@@ -197,7 +192,7 @@ const comprobarLetra = () => {
           if (current == descompuesta[i]) ac.push(current);
           return ac;
         }, []);
-        
+
         if (letrasRepetidasSecreta.length == letrasRepetidasUsuario.length) {
           intentos[posicion].children[i].classList.add("existe");
         } else {
@@ -210,8 +205,8 @@ const comprobarLetra = () => {
     }
   }
   letrasCorrecta = [];
-    letrasExiste = [];
-    letrasNoExiste = [];
+  letrasExiste = [];
+  letrasNoExiste = [];
 };
 
 const pintarTecladoDigital = (estadoLetra, vueltaUsuario, clase) => {

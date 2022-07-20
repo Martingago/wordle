@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wordle</title>
+    <link rel="stylesheet" href="assets/style/app.css">
     <link rel="stylesheet" href="assets/style/style.css">
+    <link rel="stylesheet" href="assets/style/tecladoUsuario.css">
+    <link rel="stylesheet" href="assets/style/navegador.css">
 </head>
+
 <body>
+    <!-- navegador -->
+    <nav class="wordle-nav-component">
+    <ul>
+        <li>
+            <button>Wordle</button>
+        </li>
+        <li><button>¿Que es esto?</button></li>
+        <li>
+            <button>¿Quien soy?</button>
+        </li>
+    </ul>
+</nav>
+<!-- tabla -->
     <div class="alertas-usuario"></div>
     <div class="section-input-palabras">
         <div class="palabra-usuario">
@@ -45,8 +63,11 @@
             <span class="letra"></span>
             <span class="letra"></span>
         </div>
-        <div class="error-usuario"><p class="error-msg"></p></div>
+        <div class="error-usuario">
+            <p class="error-msg"></p>
+        </div>
     </div>
+    <!-- teclado usuario -->
     <div class="teclado-usuario">
         <div class="linea-letras">
             <span class="cargar-letra"></span>
@@ -60,7 +81,7 @@
             <span class="cargar-letra"></span>
             <span class="cargar-letra"></span>
         </div>
-        
+
         <div class="linea-letras">
             <span class="cargar-letra"></span>
             <span class="cargar-letra"></span>
@@ -89,4 +110,5 @@
     </div>
 </body>
 <script defer type="module" src="app.js"></script>
+
 </html>
