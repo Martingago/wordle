@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="assets/style/style.css">
     <link rel="stylesheet" href="assets/style/tecladoUsuario.css">
     <link rel="stylesheet" href="assets/style/navegador.css">
+    <link rel="stylesheet" href="assets/style/modal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body>
@@ -17,12 +20,17 @@
     <nav class="wordle-nav-component">
     <ul>
         <li>
-            <button>Wordle</button>
+            <button>
+                <i class="fa-solid fa-circle-info"></i>
+            </button>
         </li>
-        <li><button>¿Que es esto?</button></li>
         <li>
-            <button>¿Quien soy?</button>
+            <button class="wordle-title">Wordle</button>
         </li>
+        <li><button>
+            <i class="fa-solid fa-circle-question"></i>
+        </button></li>
+        
     </ul>
 </nav>
 <!-- tabla -->
@@ -63,51 +71,69 @@
             <span class="letra"></span>
             <span class="letra"></span>
         </div>
-        <div class="error-usuario">
-            <p class="error-msg"></p>
-        </div>
     </div>
     <!-- teclado usuario -->
     <div class="teclado-usuario">
         <div class="linea-letras">
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
         </div>
 
         <div class="linea-letras">
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
         </div>
 
         <div class="linea-letras">
-            <span class="cargar-palabra">Enviar</span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="cargar-letra"></span>
-            <span class="borrar-letra">Sup</span>
+            <button class="cargar-palabra">Enviar</button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="cargar-letra"></button>
+            <button class="borrar-letra">Sup</button>
         </div>
 
     </div>
+
+<!-- Modal informacion -->
+<div class="modal-background">
+    <div class="modal-container">
+        <section class="wordle-info-proyect">
+            <h3>¿Que es esto?</h3>
+            <p> Este es uno de mis primeros proyectos como desarrollador frontend, se trata de una imitación al famoso juego que se ha hecho popular durante el año 2021: <a href="https://es.wikipedia.org/wiki/Wordle"><strong class="strong-word">Wordle</strong></a>, pero creado utilizando mi propio JavaScript y mis conocimientos de CSS y HTML.
+            </p>
+            <p>La UI/UX esta basada al 100% en la de la página oficial de Wordle, pero con pequeñas variantes de diseño basadas en mi gusto personal.</p>
+            <p>Puedes visitar la versión Oficial de Wordle en castellano: <a class="link-oficial-site" href="https://wordle.danielfrg.com/">Wordle - Un juego de palabras diario</a>
+             </p>
+        </section>
+        <section class="wordle-how-to-play">
+            <h3>¿Cómo se juega?</h3>
+            <p>Adivina la palabra oculta en cinco intentos.</p>
+            <p>Cada intento debe ser una palabra válida de 5 letras.</p>
+            <p>Después de cada intento el color de las letras cambia para mostrar qué tan cerca estás de acertar la palabra.</p>
+        </section>
+    </div>
+</div>
+
 </body>
 <script defer type="module" src="app.js"></script>
 

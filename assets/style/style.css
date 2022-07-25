@@ -55,7 +55,7 @@
 .section-input-palabras{
     display: grid;
     grid-template-columns: auto;
-    margin: auto;
+    margin: 4rem auto auto auto;
     width: fit-content;
     padding: 1rem;
     border-radius: 10px;
@@ -82,23 +82,10 @@
     color: rgba(0, 0, 0, 0.9);
     font-weight: 700;
     border-radius: 3px;
-    width: 55px;
-    height: 55px;
+    width: 65px;
+    height: 65px;
     transition: backgrund-color .3s linear;
 }
-
-.error-usuario .error-msg{
-    margin: auto;
-    text-align: center;
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    color: red;
-    font-weight: 600;
-    width: 100%;
-    height: 22px;
-
-}
-
 
 /* CLASES DE BOTONES */
 

@@ -1,14 +1,17 @@
 .wordle-nav-component{
     position: fixed;
     top: 0;
-    right: 0;
-    width: 100%;
-    background-color: green;
+    right: 50%;
+    transform: translateX(50%);
+    width: 468px;
+    background-color:var(--color-principal);
+    
 }
 .wordle-nav-component ul{
-    margin: 0;
+    margin: .5rem 0;
     display: grid;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: auto 1fr auto;
+    border-bottom: 2px solid var(--color-terciario);
 }
 .wordle-nav-component ul li{
     display: flex;
@@ -17,5 +20,15 @@
 }
     .wordle-nav-component ul li button{
         border: none;
-        margin: .5rem;
+        margin: auto;
+        background-color: transparent;
+        font-size: 1.4rem;
+        color: var(--color-secundario);
+        cursor: pointer;
+    }
+
+    .wordle-nav-component ul li .wordle-title{
+        font-size: 2rem;
+        text-transform: uppercase;
+        font-weight: 600;
     }

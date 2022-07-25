@@ -78,7 +78,6 @@ for (let i = 0; i < tecladoLetra.length; i++) {
 
 tecladoLetra.forEach((e) => {
   e.addEventListener("click", () => {
-    pintarPantalla("");
     if (introducidaUsuario.length < 5 && posicion < 5) {
       añadirAnimacionInput();
       intentos[posicion].children[introducidaUsuario.length].textContent = `${e.textContent}`;
@@ -103,7 +102,6 @@ enterTeclado.addEventListener("click", () => {
 
 //Borra datos de pantalla
 const suprimir = () => {
-  pintarPantalla("");
   introducidaUsuario.pop();
   intentos[posicion].children[introducidaUsuario.length].textContent = null;
   quitarAnimacionInput();
@@ -142,9 +140,7 @@ const validarPalabra = () => {
   return false;
 };
 
-const pintarPantalla = (texto) => {
-  pantallaError.textContent = texto;
-};
+
 const zumbidoError = () => {
   intentos[posicion].style.animation = "palabraNoValida .3s linear";
   setTimeout(() => {
@@ -155,7 +151,7 @@ const zumbidoError = () => {
 const comprobarVictoria = () => {
   if (validarPalabra(letraString)) {
     if (letraString === secretWord) {
-      pintarPantalla("ganaste");
+      // CREAR ANIMACION PARA LA VICTORIA
       comprobarLetra();
     } else {
       comprobarLetra();
