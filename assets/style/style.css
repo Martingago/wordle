@@ -55,7 +55,7 @@
 .section-input-palabras{
     display: grid;
     grid-template-columns: auto;
-    margin: 4rem auto auto auto;
+    margin: 3rem auto auto auto;
     width: fit-content;
     padding: 1rem;
     border-radius: 10px;
