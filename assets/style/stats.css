@@ -1,0 +1,16 @@
+.modal-background-stats{
+    position: fixed;
+    top:0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-principal);
+}
+.user-stats{
+    width: 100%;
+    max-width: 600px;
+}
+.table-user-stats{
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+}

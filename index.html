@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/style/tecladoUsuario.css">
     <link rel="stylesheet" href="assets/style/navegador.css">
     <link rel="stylesheet" href="assets/style/modal.css">
+    <link rel="stylesheet" href="assets/style/stats.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
@@ -27,7 +28,7 @@
         <li>
             <h1 class="wordle-title">Wordle</h1>
         </li>
-        <li><button>
+        <li><button class="btn-stats">
             <i class="fa-solid fa-circle-question"></i>
         </button></li>
         
@@ -165,8 +166,47 @@
     </div>
 </div>
 
-</body>
-<script defer type="module" src="app.js"></script>
+<div class="modal-background-stats">
+    <div class="modal-container">
+        <section class="user-stats">
+            <h3>Estadísticas</h3>
+            <div class="table-user-stats">
+                <span>
+                    <h4>Partidas</h4>
+                    <p class="user-partidas">43</p>
+                </span>
+                <span>
+                    <h4>Victorias</h4>
+                    <p class="user-victorias">23</p>
+                </span>
+                <span>
+                    <h4>Derrotas</h4>
+                    <p class="user-derrotas">21</p>
+                </span>
+                <span>
+                    <h4>% victorias</h4>
+                    <p class="user-porcentaje-victorias">43%</p>
+                </span>
+                <span>
+                    <h4>Racha actual</h4>
+                    <p class="user-racha-actual">3</p>
+                </span>
+                <span>
+                    <h4>Mejor racha</h4>
+                    <p class="user-mejor-racha">3</p>
+                </span>
+                
+
+            </div>
+        </section>
+    </div>
+
+</div>
+
+<script type="module" src="app.js"></script>
 <script src="hooks/buttons.js"></script>
+<script type="module" src="hooks/storageDatos.js"></script>
+</body>
+
 
 </html>

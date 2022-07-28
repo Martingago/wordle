@@ -1,7 +1,20 @@
 "use strict";
+
 import { basePalabras } from "./hooks/basePalabras.js";
-import { validarInput, AlertaPalabraNoValida } from "./hooks/funcionesPantalla.js";
+import {
+  validarInput,
+  AlertaPalabraNoValida,
+} from "./hooks/funcionesPantalla.js";
 import { secretWord } from "./hooks/basePalabras.js";
+import { añadirVictoria, añadirDerrota, añadirPartida, actualizarRachaVictorias } from "./hooks/storageDatos.js";
+
+if (localStorage.getItem("partidas") == null) {
+  localStorage.setItem("partidas", 0);
+  localStorage.setItem("victorias", 0);
+  localStorage.setItem("derrotas", 0);
+  localStorage.setItem("rachaVictorias", 0);
+  localStorage.setItem("mejorRachaVictoria", 0);
+}
 
 console.log("La palabra secreta es:", secretWord);
 
@@ -80,7 +93,9 @@ tecladoLetra.forEach((e) => {
   e.addEventListener("click", () => {
     if (introducidaUsuario.length < 5 && posicion < 5) {
       añadirAnimacionInput();
-      intentos[posicion].children[introducidaUsuario.length].textContent = `${e.textContent}`;
+      intentos[posicion].children[
+        introducidaUsuario.length
+      ].textContent = `${e.textContent}`;
       introducidaUsuario.push(e.textContent.toLowerCase());
     }
   });
@@ -140,7 +155,6 @@ const validarPalabra = () => {
   return false;
 };
 
-
 const zumbidoError = () => {
   intentos[posicion].style.animation = "palabraNoValida .3s linear";
   setTimeout(() => {
@@ -150,13 +164,24 @@ const zumbidoError = () => {
 // Comprueba si el usuario ha acertado la palabra
 const comprobarVictoria = () => {
   if (validarPalabra(letraString)) {
+    // Acierta la palabra
     if (letraString === secretWord) {
+      añadirVictoria();
+      añadirPartida();
       // CREAR ANIMACION PARA LA VICTORIA
       comprobarLetra();
+      actualizarRachaVictorias()
+
     } else {
       comprobarLetra();
       posicion++;
       introducidaUsuario = [];
+      if(posicion === 5){
+        añadirPartida();
+        añadirDerrota();
+        actualizarRachaVictorias()
+        localStorage.setItem("rachaVictorias", 0);
+      }
     }
   }
 };
