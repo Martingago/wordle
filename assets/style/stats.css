@@ -1,16 +1,63 @@
 .modal-background-stats{
-    position: fixed;
+    position: absolute;
     top:0;
     right: 0;
-    width: 100%;
-    height: 100vh;
+    width: 0;
+    height: 0;
     background-color: var(--color-principal);
+    overflow: hidden;
 }
+
+.close-btn-stats {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    font-size: 1.2rem;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+    transition: background-color .2s linear;
+    border-radius: 3px;
+  }
+  .close-btn-stats:hover{
+    background-color: lightgray;
+  }
+
+
 .user-stats{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
     width: 100%;
     max-width: 600px;
 }
 .table-user-stats{
     display: grid;
     grid-template-columns: repeat(3, auto);
+}
+
+.table-user-stats span h4{
+  font-size: 1rem;
+  font-weight: 400;
+  margin: .25rem auto;
+}
+.table-user-stats span p{
+  font-size: 1.4rem;
+  font-weight: 900;
+  margin: .25rem auto;
+}
+.table-user-stats span h4, .table-user-stats span p{
+  text-align: center;
+}
+
+.mostrar-modal-stats{
+width: 100%;
+height: 100vh;
+overflow: auto;
+opacity: 1;
 }

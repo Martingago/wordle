@@ -16,6 +16,7 @@ if (localStorage.getItem("partidas") == null) {
   localStorage.setItem("mejorRachaVictoria", 0);
 }
 
+
 console.log("La palabra secreta es:", secretWord);
 
 const letras = document.querySelectorAll(".letra");
@@ -168,15 +169,16 @@ const comprobarVictoria = () => {
     if (letraString === secretWord) {
       añadirVictoria();
       añadirPartida();
-      // CREAR ANIMACION PARA LA VICTORIA
       comprobarLetra();
       actualizarRachaVictorias()
+      // CREAR ANIMACION PARA LA VICTORIA
 
     } else {
       comprobarLetra();
       posicion++;
       introducidaUsuario = [];
       if(posicion === 5){
+        console.log("a")
         añadirPartida();
         añadirDerrota();
         actualizarRachaVictorias()

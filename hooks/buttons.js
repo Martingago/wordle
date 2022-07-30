@@ -17,3 +17,11 @@ closeBtnInfo.addEventListener("click",
 const btnStats = document.querySelector(".btn-stats");
 const modalStats = document.querySelector(".modal-background-stats");
 const closeBtnStats = document.querySelector(".close-btn-stats");
+
+btnStats.addEventListener("click",()=> {
+  modalStats.classList.add("mostrar-modal-stats")
+})
+
+closeBtnStats.addEventListener("click", ()=> {
+  modalStats.classList.remove("mostrar-modal-stats")
+})
