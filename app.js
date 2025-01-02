@@ -1,12 +1,9 @@
 "use strict";
 
-import { basePalabras } from "./hooks/basePalabras.js";
-import {
-  validarInput,
-  AlertaPalabraNoValida,
-} from "./hooks/funcionesPantalla.js";
-import { secretWord } from "./hooks/basePalabras.js";
-import { añadirVictoria, añadirDerrota, añadirPartida, actualizarRachaVictorias } from "./hooks/storageDatos.js";
+import {validarInput, AlertaPalabraNoValida } from "./hooks/funcionesPantalla.js";
+import { generateSecretWord, basePalabras } from "./hooks/basePalabras.js";
+import { añadirVictoria, añadirDerrota, añadirPartida, actualizarRachaVictorias, updateStoreStats } from "./hooks/storageDatos.js";
+import { showWinModal, showLoseModal } from "./hooks/buttons.js";
 
 if (localStorage.getItem("partidas") == null) {
   localStorage.setItem("partidas", 0);
@@ -16,21 +13,28 @@ if (localStorage.getItem("partidas") == null) {
   localStorage.setItem("mejorRachaVictoria", 0);
 }
 
-
-console.log("La palabra secreta es:", secretWord);
+updateStoreStats(); //Inicializa las estadisticas del jugador
+let secretWord = generateSecretWord()
 
 const letras = document.querySelectorAll(".letra");
-// Variables default cuando se inicializa la app
+
 let descompuesta = [];
 let introducidaUsuario = [];
 let posicion = 0;
 
+const startGame = () => {
+// Variables default cuando se inicializa la app
+  descompuesta = [];
+  introducidaUsuario = [];
+  posicion = 0;
 // Fragmenta la palabra en un array con las letras separadas
 for (let i = 0; i < secretWord.length; i++) {
   descompuesta.push(secretWord[i]);
 }
+}
 
-const pantallaError = document.querySelector(".error-msg");
+startGame();
+
 const intentos = document.querySelectorAll(".palabra-usuario");
 
 // Esta funcion se encarga de mostrar por pantalla los datos que introduce el usuario mediante teclado.
@@ -170,19 +174,25 @@ const comprobarVictoria = () => {
       añadirVictoria();
       añadirPartida();
       comprobarLetra();
-      actualizarRachaVictorias()
-      // CREAR ANIMACION PARA LA VICTORIA
-
+      actualizarRachaVictorias();
+      limpiarTecladoDigital();
+      updateStoreStats();
+      // TERMINA LA PARTIDA
+      showWinModal(letraString);
     } else {
       comprobarLetra();
       posicion++;
       introducidaUsuario = [];
       if(posicion === 5){
-        console.log("a")
         añadirPartida();
         añadirDerrota();
-        actualizarRachaVictorias()
+        actualizarRachaVictorias();
         localStorage.setItem("rachaVictorias", 0);
+        limpiarTecladoDigital();
+        updateStoreStats();
+        //TERMINAR LA PARTIDA
+        showLoseModal(secretWord);
+        
       }
     }
   }
@@ -195,42 +205,40 @@ let letrasExiste = [];
 let letrasNoExiste = [];
 
 const comprobarLetra = () => {
+  // Copia de la palabra secreta para manipular y marcar letras usadas
+  const descompuestaTemp = [...descompuesta];
+
+  // Primera pasada: identificar letras correctas
   for (let i = 0; i < 5; i++) {
-    if (descompuesta[i] == introducidaUsuario[i]) {
+    if (descompuestaTemp[i] === introducidaUsuario[i]) {
       intentos[posicion].children[i].classList.add("correcta");
       pintarTecladoDigital(letrasCorrecta, introducidaUsuario[i], "correcta");
-    } else {
-      if (descompuesta.includes(introducidaUsuario[i])) {
+      descompuestaTemp[i] = null; // Marcar como usada
+    }
+  }
+
+  // Segunda pasada: identificar letras mal colocadas o que no existen
+  for (let i = 0; i < 5; i++) {
+    if (!intentos[posicion].children[i].classList.contains("correcta")) {
+      const letraIndex = descompuestaTemp.indexOf(introducidaUsuario[i]);
+      if (letraIndex !== -1) {
+        // La letra existe pero está mal colocada
         intentos[posicion].children[i].classList.add("existe");
         pintarTecladoDigital(letrasExiste, introducidaUsuario[i], "existe");
-
-        const letrasRepetidasUsuario = introducidaUsuario.reduce(
-          (ac, current) => {
-            if (current == introducidaUsuario[i]) ac.push(current);
-            return ac;
-          },
-          []
-        );
-        const letrasRepetidasSecreta = descompuesta.reduce((ac, current) => {
-          if (current == descompuesta[i]) ac.push(current);
-          return ac;
-        }, []);
-
-        if (letrasRepetidasSecreta.length == letrasRepetidasUsuario.length) {
-          intentos[posicion].children[i].classList.add("existe");
-        } else {
-          intentos[posicion].children[i].classList.add("noexiste");
-        }
+        descompuestaTemp[letraIndex] = null; // Marcar como usada
       } else {
+        // La letra no existe en la palabra secreta
         intentos[posicion].children[i].classList.add("noexiste");
         pintarTecladoDigital(letrasNoExiste, introducidaUsuario[i], "noexiste");
       }
     }
   }
+
   letrasCorrecta = [];
   letrasExiste = [];
   letrasNoExiste = [];
 };
+
 
 const pintarTecladoDigital = (estadoLetra, vueltaUsuario, clase) => {
   estadoLetra.push(tecladoDigital.indexOf(vueltaUsuario));
@@ -245,3 +253,27 @@ const limpiarTecladoDigital = () => {
     }
   }
 };
+
+const clearDecalls = () => {
+  const letrasBtn = document.querySelectorAll(".cargar-letra");
+  letras.forEach(element => {
+    element.textContent = "";
+    element.classList.remove("correcta")
+    element.classList.remove("existe")
+    element.classList.remove("noexiste")
+  });
+
+  letrasBtn.forEach(element => {
+    element.classList.remove("correcta")
+    element.classList.remove("existe")
+    element.classList.remove("noexiste") 
+  })
+
+}
+
+
+export const reiniciarPartida = ()=>{
+  secretWord = generateSecretWord();
+  clearDecalls();
+  startGame();
+}

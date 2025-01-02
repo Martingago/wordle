@@ -47,18 +47,21 @@ export const actualizarRachaVictorias = () => {
     }
 }
 
-let porcentajeVictoria = Math.round(victoriasUsuario / partidasUsuario * 100);
-// Inicializando score del usuario
-dataPartidas.textContent = `${partidasUsuario}`;
-dataVictorias.textContent = `${victoriasUsuario}`;
-dataDerrotas.textContent = `${derrotaUsuario}`;
-console.log(porcentajeVictoria)
-if(!porcentajeVictoria){
-    document.querySelector(".user-porcentaje-victorias").textContent = 0;
-} else{
-    document.querySelector(".user-porcentaje-victorias").textContent = `${porcentajeVictoria}%`;
+export const updateStoreStats = () => {
+    let porcentajeVictoria = Math.round(victoriasUsuario / partidasUsuario * 100);
+    // Inicializando score del usuario
+    dataPartidas.textContent = `${partidasUsuario}`;
+    dataVictorias.textContent = `${victoriasUsuario}`;
+    dataDerrotas.textContent = `${derrotaUsuario}`;
+    if(!porcentajeVictoria){
+        document.querySelector(".user-porcentaje-victorias").textContent = 0;
+    } else{
+        document.querySelector(".user-porcentaje-victorias").textContent = `${porcentajeVictoria}%`;
+    }
+    
+    dataRacha.textContent = `${currentRachaVictorias}`;
+    dataMejorRacha.textContent = `${MayorRachaVictorias}`;
 }
 
-dataRacha.textContent = `${currentRachaVictorias}`;
-dataMejorRacha.textContent = `${MayorRachaVictorias}`;
+
 

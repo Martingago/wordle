@@ -6,11 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wordle</title>
+    <link rel="icon" href="assets/img/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/style/app.css">
     <link rel="stylesheet" href="assets/style/style.css">
     <link rel="stylesheet" href="assets/style/tecladoUsuario.css">
     <link rel="stylesheet" href="assets/style/navegador.css">
     <link rel="stylesheet" href="assets/style/modal.css">
+    <link rel="stylesheet" href="assets/style/modalGame.css">
     <link rel="stylesheet" href="assets/style/stats.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -37,41 +39,41 @@
 <!-- tabla -->
     <div class="alertas-usuario"></div>
     <div class="section-input-palabras">
-        <div class="palabra-usuario">
+        <p class="palabra-usuario">
             <span class="letra"></span>
             <span class="letra"></span>
             <span class="letra"></span>
             <span class="letra"></span>
             <span class="letra"></span>
-        </div>
-        <div class="palabra-usuario">
+        </p>
+        <p class="palabra-usuario">
             <span class="letra"></span>
             <span class="letra"></span>
             <span class="letra"></span>
             <span class="letra"></span>
             <span class="letra"></span>
-        </div>
-        <div class="palabra-usuario">
+        </p>
+        <p class="palabra-usuario">
             <span class="letra"></span>
             <span class="letra"></span>
             <span class="letra"></span>
             <span class="letra"></span>
             <span class="letra"></span>
-        </div>
-        <div class="palabra-usuario">
+        </p>
+        <p class="palabra-usuario">
             <span class="letra"></span>
             <span class="letra"></span>
             <span class="letra"></span>
             <span class="letra"></span>
             <span class="letra"></span>
-        </div>
-        <div class="palabra-usuario">
+        </p>
+        <p class="palabra-usuario">
             <span class="letra"></span>
             <span class="letra"></span>
             <span class="letra"></span>
             <span class="letra"></span>
             <span class="letra"></span>
-        </div>
+        </p>
     </div>
     <!-- teclado usuario -->
     <div class="teclado-usuario">
@@ -114,6 +116,24 @@
         </div>
 
     </div>
+
+<div id="modal-win-info" class="hide-win-modal">
+    <article class="win-modal">
+        <h2>Enhorabuena, has ganado!</h2>
+        <img class="win-img" src="assets/img/trophy-victory-player.png" alt="imagen trofeo victoria usuario">
+        <p>La palabra oculta era: <br> <span class="confirmation-word">piedra</span></p>
+        <button class="btn-app reset-game-btn">Jugar de nuevo</button>
+    </article>
+</div>   
+
+<div id="modal-lose-info" class="hide-lose-modal">
+    <article class="lose-modal">
+        <h2>Vaya, has perdido!</h2>
+        <img class="lose-img" src="/assets/img/lose-icon.png" alt="imagen derrota del usuario">
+        <p>La palabra oculta era: <br> <span class="confirmation-lose-word">piedra</span></p>
+        <button class="btn-app" id="reset-btn-lose">Jugar de nuevo</button>
+    </article>
+</div>
 
 <!-- Modal informacion -->
 <div class="modal-background-info">
@@ -205,9 +225,8 @@
 </div>
 
 <script type="module" src="app.js"></script>
-<script src="hooks/buttons.js"></script>
 <script type="module" src="hooks/storageDatos.js"></script>
+<script type="module" src="hooks/buttons.js"></script>
 </body>
-
 
 </html>
