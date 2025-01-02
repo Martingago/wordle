@@ -88,19 +88,20 @@ const tecladoDigital = [
   "n",
   "m",
 ];
-const tecladoLetra = document.querySelectorAll(".cargar-letra");
+const tecladoLetra = document.querySelectorAll(".btn-letra");
 
 for (let i = 0; i < tecladoLetra.length; i++) {
-  tecladoLetra[i].textContent = `${tecladoDigital[i].toUpperCase()}`;
+  const letra = tecladoDigital[i].toUpperCase();
+  tecladoLetra[i].textContent = letra;
+  tecladoLetra[i].setAttribute('aria-label', `Botón de la letra ${letra}`);
+  tecladoLetra[i].setAttribute('title', `Letra ${letra}`);
 }
 
 tecladoLetra.forEach((e) => {
   e.addEventListener("click", () => {
     if (introducidaUsuario.length < 5 && posicion < 5) {
       añadirAnimacionInput();
-      intentos[posicion].children[
-        introducidaUsuario.length
-      ].textContent = `${e.textContent}`;
+      intentos[posicion].children[introducidaUsuario.length].textContent = `${e.textContent}`;
       introducidaUsuario.push(e.textContent.toLowerCase());
     }
   });
@@ -255,7 +256,7 @@ const limpiarTecladoDigital = () => {
 };
 
 const clearDecalls = () => {
-  const letrasBtn = document.querySelectorAll(".cargar-letra");
+  const letrasBtn = document.querySelectorAll(".btn-letra");
   letras.forEach(element => {
     element.textContent = "";
     element.classList.remove("correcta")

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wordle</title>
+    <title>Wordle - martingago.dev</title>
     <link rel="icon" href="assets/img/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/style/app.css">
     <link rel="stylesheet" href="assets/style/style.css">
@@ -14,29 +14,29 @@
     <link rel="stylesheet" href="assets/style/modal.css">
     <link rel="stylesheet" href="assets/style/modalGame.css">
     <link rel="stylesheet" href="assets/style/stats.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 </head>
 
 <body>
     <!-- navegador -->
     <nav class="wordle-nav-component">
-    <ul>
-        <li>
-            <button class="btn-info">
-                <i class="fa-solid fa-circle-info"></i>
-            </button>
-        </li>
-        <li>
-            <h1 class="wordle-title">Wordle</h1>
-        </li>
-        <li><button class="btn-stats">
-            <i class="fa-solid fa-circle-question"></i>
-        </button></li>
-        
-    </ul>
-</nav>
-<!-- tabla -->
+        <ul>
+            <li>
+                <button class="btn-info" title="Información" aria-label="Botón de información">
+                    <img class="btn-icon" src="assets/img/icons/circle-info-solid.svg" alt="Icono información">
+                </button>
+            </li>
+            <li>
+                <h1 class="wordle-title">Wordle</h1>
+            </li>
+            <li>
+                <button class="btn-stats" title="Estadísticas" aria-label="Botón de estadísticas de usuario">
+                    <img class="btn-icon" src="assets/img/icons/chart-simple-solid.svg" alt="Icono de estadísticas">
+                </button>
+            </li>
+
+        </ul>
+    </nav>
+    <!-- tabla de entrada de usuario y alertas -->
     <div class="alertas-usuario"></div>
     <div class="section-input-palabras">
         <p class="palabra-usuario">
@@ -78,155 +78,202 @@
     <!-- teclado usuario -->
     <div class="teclado-usuario">
         <div class="linea-letras">
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
         </div>
 
         <div class="linea-letras">
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
         </div>
 
         <div class="linea-letras">
-            <button class="cargar-palabra">Enviar</button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="cargar-letra"></button>
-            <button class="borrar-letra">Sup</button>
+            <button class="cargar-palabra" title="Enviar" aria-label="Botón enviar palabra">Enviar</button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="btn-letra"></button>
+            <button class="borrar-letra" title="Eliminar letra" aria-label="Botón eliminar letra">Sup</button>
         </div>
 
     </div>
 
-<div id="modal-win-info" class="hide-win-modal">
-    <article class="win-modal">
-        <h2>Enhorabuena, has ganado!</h2>
-        <img class="win-img" src="assets/img/trophy-victory-player.png" alt="imagen trofeo victoria usuario">
-        <p>La palabra oculta era: <br> <span class="confirmation-word">piedra</span></p>
-        <button class="btn-app reset-game-btn">Jugar de nuevo</button>
-    </article>
-</div>   
 
-<div id="modal-lose-info" class="hide-lose-modal">
-    <article class="lose-modal">
-        <h2>Vaya, has perdido!</h2>
-        <img class="lose-img" src="/assets/img/lose-icon.png" alt="imagen derrota del usuario">
-        <p>La palabra oculta era: <br> <span class="confirmation-lose-word">piedra</span></p>
-        <button class="btn-app" id="reset-btn-lose">Jugar de nuevo</button>
-    </article>
-</div>
 
-<!-- Modal informacion -->
-<div class="modal-background-info">
-    <div class="modal-container">
-        <section class="wordle-info-proyect">
-            <button class="close-btn-info"><i class="fa-solid fa-xmark"></i></button>
-            <h3>¿Que es esto?</h3>
-            <p> Este es uno de mis primeros proyectos como desarrollador frontend, se trata de una imitación al famoso juego que se ha hecho popular durante el año 2021: <a href="https://es.wikipedia.org/wiki/Wordle"><strong class="strong-word">Wordle</strong></a>, pero creado utilizando mi propio JavaScript y mis conocimientos de CSS y HTML.
-            </p>
-            <p>La UI/UX esta basada al 100% en la de la página oficial de Wordle, pero con pequeñas variantes de diseño basadas en mi gusto personal.</p>
-            <p>Puedes visitar la versión Oficial de Wordle en castellano: <a class="link-oficial-site" href="https://wordle.danielfrg.com/">Wordle - Un juego de palabras diario</a>
-             </p>
-        </section>
-        <section class="wordle-how-to-play">
-            <div class="info-play">
-                <h3>¿Cómo se juega?</h3>
-                <p>Adivina la palabra oculta en cinco intentos.</p>
-                <p>Cada intento debe ser una palabra válida de 5 letras.</p>
-                <p>Después de cada intento el color de las letras cambia para mostrar qué tan cerca estás de acertar la palabra.</p>
-            </div>
-            <div class="examples-game">
-                <h3>Ejemplos</h3>
-                <div class="palabra-usuario">
-                    <span class="letra correcta">R</span>
-                    <span class="letra">U</span>
-                    <span class="letra">B</span>
-                    <span class="letra">I</span>
-                    <span class="letra">A</span>
-                </div>
-                <p class="example-description">La letra <strong>R</strong> está en la palabra y en la posición correcta</p>
-                <div class="palabra-usuario">
-                    <span class="letra ">V</span>
-                    <span class="letra">O</span>
-                    <span class="letra existe">C</span>
-                    <span class="letra">A</span>
-                    <span class="letra">L</span>
-                </div>
-                <p class="example-description">La letra <strong>C</strong> está en la palabra pero en la posición incorrecta.</p>
-                <div class="palabra-usuario">
-                    <span class="letra ">C</span>
-                    <span class="letra">A</span>
-                    <span class="letra">N</span>
-                    <span class="letra">T</span>
-                    <span class="letra noexiste">O</span>
-                </div>
-                <p class="example-description">La letra <strong>O</strong> no está en la palabra.</p>
-                <p>Puede haber letras repetidas y en ese caso las pistas son independientes para cada letra y tienen prioridad.</p>
-            </div>
-        </section>
-    </div>
-</div>
+    <footer class="footer-web">
+        <ul>
+            <li>
+                <a href="https://www.linkedin.com/in/martin-gago-choren/" target="_blank" title="Visitar Linkedin" aria-label="Botón visitar linkedin Martín">
+                    <img class="btn-icon-xl" src="assets/img/icons/linkedin-brands-solid.svg" alt="Logotipo de linkedin">
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/Martingago/wordle" target="_blank" title="Visitar github" aria-label="Botón visitar Github Martín">
+                    <img class="btn-icon-xl" src="assets/img/icons/github-brands-solid.svg" alt="Logotipo de github">
+                </a>
+            </li>
+        </ul>
+    </footer>
 
-<div class="modal-background-stats">
-    <div class="modal-container">
-        <section class="user-stats">
-            <button class="close-btn-stats"><i class="fa-solid fa-xmark"></i></button>
-            <h3>Estadísticas</h3>
-            <div class="table-user-stats">
-                <span>
-                    <h4>Partidas</h4>
-                    <p class="user-partidas"></p>
-                </span>
-                <span>
-                    <h4>Victorias</h4>
-                    <p class="user-victorias"></p>
-                </span>
-                <span>
-                    <h4>Derrotas</h4>
-                    <p class="user-derrotas"></p>
-                </span>
-                <span>
-                    <h4>% victorias</h4>
-                    <p class="user-porcentaje-victorias"></p>
-                </span>
-                <span>
-                    <h4>Racha actual</h4>
-                    <p class="user-racha-actual"></p>
-                </span>
-                <span>
-                    <h4>Mejor racha</h4>
-                    <p class="user-mejor-racha"></p>
-                </span>
-                
-
-            </div>
-        </section>
+    <!-- Modal de victoria -->
+    <div id="modal-win-info" class="hide-win-modal">
+        <article class="win-modal">
+            <h2>Enhorabuena, has ganado!</h2>
+            <img class="win-img" src="assets/img/trophy-victory-player.png" alt="imagen trofeo victoria usuario">
+            <p>La palabra oculta era: <br> <span class="confirmation-word">piedra</span></p>
+            <button class="btn-app reset-game-btn">Jugar de nuevo</button>
+        </article>
     </div>
 
-</div>
+    <!-- Modal de derrota -->
+    <div id="modal-lose-info" class="hide-lose-modal">
+        <article class="lose-modal">
+            <h2>Vaya, has perdido!</h2>
+            <img class="lose-img" src="/assets/img/lose-icon.png" alt="imagen derrota del usuario">
+            <p>La palabra oculta era: <br> <span class="confirmation-lose-word">piedra</span></p>
+            <button class="btn-app" id="reset-btn-lose">Jugar de nuevo</button>
+        </article>
+    </div>
 
-<script type="module" src="app.js"></script>
-<script type="module" src="hooks/storageDatos.js"></script>
-<script type="module" src="hooks/buttons.js"></script>
+    <!-- Modal informacion -->
+    <div class="modal-background-info">
+        <div class="modal-container">
+            <div class="modal-title">
+                <button class="close-btn-info" title="Cerrar" aria-label="Botón de cerrar menú">
+                    <img class="btn-icon" src="assets/img/icons/xmark-solid.svg" alt="icono cerrar menu">
+                </button>
+                <h3>Información</h3>
+            </div>
+            <section class="wordle-info-proyect">
+                <p> Versión del famoso juego <a
+                        href="https://es.wikipedia.org/wiki/Wordle" target="_blank"><strong class="strong-word">Wordle</strong></a>,
+                    en su versión gallego con palabras extraídas de la Real Academia Galega (RAG).
+                </p>
+                <p>Puedes visitar la versión Oficial de Wordle en castellano: <a class="link-oficial-site"
+                        href="https://wordle.danielfrg.com/" target="_blank">Wordle - Un juego de palabras diario</a>
+                </p>
+            </section>
+            <section class="wordle-how-to-play">
+                <div class="info-play">
+                    <h3>¿Cómo se juega?</h3>
+                    <p>Adivina la palabra oculta en cinco intentos.</p>
+                    <p>Cada intento debe ser una palabra válida de 5 letras.</p>
+                    <p>Después de cada intento el color de las letras cambia para mostrar qué tan cerca estás de acertar
+                        la palabra.</p>
+                </div>
+                <div class="examples-game">
+                    <h3>Ejemplos</h3>
+                    <div class="palabra-usuario">
+                        <span class="letra correcta">R</span>
+                        <span class="letra">U</span>
+                        <span class="letra">B</span>
+                        <span class="letra">I</span>
+                        <span class="letra">A</span>
+                    </div>
+                    <p class="example-description">La letra <strong>R</strong> está en la palabra y en la posición
+                        correcta
+                    </p>
+                    <hr>
+
+                    <div class="palabra-usuario">
+                        <span class="letra ">V</span>
+                        <span class="letra">O</span>
+                        <span class="letra existe">C</span>
+                        <span class="letra">A</span>
+                        <span class="letra">L</span>
+                    </div>
+                    <p class="example-description">La letra <strong>C</strong> está en la palabra pero en la posición
+                        incorrecta.
+                    </p>
+                    <hr>
+
+                    <div class="palabra-usuario">
+                        <span class="letra ">C</span>
+                        <span class="letra">A</span>
+                        <span class="letra">N</span>
+                        <span class="letra">T</span>
+                        <span class="letra noexiste">O</span>
+                    </div>
+                    <p class="example-description">La letra <strong>O</strong> no está en la palabra.</p>
+                    <hr>
+                    <p>Puede haber letras repetidas y en ese caso las pistas son independientes para cada letra y tienen
+                        prioridad.
+                    </p>
+                    
+                </div>
+            </section>
+            <section>
+                <h3>Modo trampa</h3>
+                <p>Si quieres hacer trampas y ver cual es la palabra oculta, puedes hacerlo mediante:</p>
+                <p class="strong-txt">click derecho en la web > Inspeccionar > Consola</p>
+            </section>
+        </div>
+    </div>
+
+    <!-- Modal estadísticas del jugador -->
+    <div class="modal-background-stats">
+        <div class="modal-container">
+            <article class="user-stats">
+                <button class="close-btn-stats" title="Cerrar" aria-label="Botón cerrar menú">
+                    <img class="btn-icon" src="assets/img/icons/xmark-solid.svg" alt="icono cerrar menu">
+                </button>
+                <h3>Estadísticas</h3>
+                <div class="table-user-stats">
+                    <span>
+                        <h4>Partidas</h4>
+                        <p class="user-partidas"></p>
+                    </span>
+                    <span>
+                        <h4>Victorias</h4>
+                        <p class="user-victorias"></p>
+                    </span>
+                    <span>
+                        <h4>Derrotas</h4>
+                        <p class="user-derrotas"></p>
+                    </span>
+                    <span>
+                        <h4>% victorias</h4>
+                        <p class="user-porcentaje-victorias"></p>
+                    </span>
+                    <span>
+                        <h4>Racha actual</h4>
+                        <p class="user-racha-actual"></p>
+                    </span>
+                    <span>
+                        <h4>Mejor racha</h4>
+                        <p class="user-mejor-racha"></p>
+                    </span>
+
+
+                </div>
+            </article>
+        </div>
+
+    </div>
+
+
+    <script type="module" src="app.js"></script>
+    <script type="module" src="hooks/storageDatos.js"></script>
+    <script type="module" src="hooks/buttons.js"></script>
 </body>
 
 </html>

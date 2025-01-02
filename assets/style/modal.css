@@ -14,7 +14,7 @@
   display: grid;
   grid-template-columns: 1fr;
   margin: 1rem auto;
-  gap: 2rem;
+  gap: 1rem;
   padding: 1rem;
   max-width: 468px;
   height: fit-content;
@@ -22,15 +22,22 @@
   color: var(--color-secundario);
 }
 
+.modal-title{
+  background-color: white;
+  position: sticky;
+  width: 100%;
+  top:0px
+}
+
 .close-btn-info {
   position: absolute;
-  top: 0;
+  top: 50%;
   right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1rem;
   font-size: 1.2rem;
+  transform: translateY(-50%);
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -48,7 +55,6 @@
 }
 .modal-container p {
   margin: 0.5rem 0;
-  text-align: justify;
 }
 .strong-word {
   color: var(--color-secundario);

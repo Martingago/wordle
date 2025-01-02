@@ -44,3 +44,16 @@
         font-weight: 600;
         margin: auto;
     }
+
+.footer-web{
+    display: flex;
+    justify-content: center;
+    max-width: 468px;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+.footer-web ul {
+    display: flex;
+    gap: 2rem;
+}
