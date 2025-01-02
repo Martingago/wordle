@@ -1,14 +1,16 @@
 /* TECLADO */
 .teclado-usuario{
+    max-width: 468px;
+    width: 100%;
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: repeat(3, auto);
     height: fit-content;
     width: fit-content;
-    margin: 0 auto;
+    margin: 1rem auto;
     gap: .25rem;
-    padding: 1rem;
     user-select: none;
+    -webkit-user-select: none;
     cursor: pointer;
 }
 
@@ -34,6 +36,16 @@
 }
 .btn-letra:focus{
     outline: none;
+}
+
+.existe:focus{
+    background-color: rgb(231, 212, 149);
+}
+.noexiste:focus{
+    background-color: rgb(171, 175, 179);
+}
+.correcta:focus{
+    background-color: rgb(149, 221, 149);
 }
     .cargar-palabra, .borrar-letra{
         display: inline-flex;
@@ -78,17 +90,14 @@
 
 @media screen and (max-width:520px) {
     .teclado-usuario{
-        gap: .15rem;
-        padding: .5rem
+        max-width: none;
+        width: 95%;
     }
         .btn-letra{
-            min-width: 8vw;
             width: 100%;
-            height: 35px;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
     .cargar-palabra, .borrar-letra{
-        height: 35px;
         font-size: 1rem;
     }
 }

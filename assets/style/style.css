@@ -60,6 +60,7 @@
     padding: 1rem;
     border-radius: 10px;
     user-select: none;
+    -webkit-user-select: none;
     gap: .25rem;
 }
 
@@ -91,4 +92,11 @@
 
 .focus{
     border: 2px solid black;
+}
+
+@media screen and (max-width: 380px) {
+    .letra{
+        width: max-content;
+        aspect-ratio: 1/1;
+    }
 }
